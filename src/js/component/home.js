@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Task from "./tasks";
+import List from "./tasks";
 
 //include images into your bundle
 // import rigoImage from "../../img/rigo-baby.jpg";
@@ -21,20 +21,48 @@ export function Home() {
 		updateItemList([...itemList, { item: currentItem, key: Date.now() }]);
 		setCurrentItem("");
 	};
+	//contador
+	let countItems = itemList.length;
+
 	return (
-		<div className="container mt-5">
-			<div className="row mt-5" style={{ display: "inline-block" }}>
-				<h2 className="text-center">todos</h2>
-				<div className="col-sm-12">
-					<input
-						value={currentItem}
-						onChange={onChangeHandler}></input>
-					<button onClick={addItemToList}>+</button>
-					<ul className="list-group mt-5">
-						<li className="list-grout-item">
-							<Task />
-						</li>
-					</ul>
+		<div className="container">
+			<div className="centered">
+				<div className="secondBG">
+					<div
+						className="row mt-5"
+						style={{ display: "inline-block" }}>
+						<h1 className="text-center text-capitalize">
+							to do list
+						</h1>
+						<div className="col-sm-12">
+							<div className="input-group mb-3">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Ingrese tarea"
+									value={currentItem}
+									onChange={onChangeHandler}
+								/>
+								<div className="input-group-append">
+									<button
+										className="btn btn-outline-success"
+										type="button"
+										onClick={addItemToList}>
+										Agregar tarea
+									</button>
+								</div>
+							</div>
+							<ul className="list-group mt-5">
+								<li className="list-group-item">
+									<List
+										itemList={itemList}
+										updateItemList={updateItemList}
+									/>
+								</li>
+							</ul>
+							<div>{countItems} of items</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
